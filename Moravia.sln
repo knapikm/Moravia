@@ -5,6 +5,15 @@ VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Homework", "Homework\Homework.csproj", "{2B9864B2-3324-44C4-8F64-57BCC7272512}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{92F6BC75-625B-4CB7-824F-9658B61AD3F6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TargetFiles", "TargetFiles", "{7C63A4DD-8818-40AD-891A-728C9FAADCF1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SourceFiles", "SourceFiles", "{6ACA5FDF-1AC3-431B-BCBF-8B841FE2CA75}"
+	ProjectSection(SolutionItems) = preProject
+		SourceFiles\Document1.xml = SourceFiles\Document1.xml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,6 +27,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7C63A4DD-8818-40AD-891A-728C9FAADCF1} = {92F6BC75-625B-4CB7-824F-9658B61AD3F6}
+		{6ACA5FDF-1AC3-431B-BCBF-8B841FE2CA75} = {92F6BC75-625B-4CB7-824F-9658B61AD3F6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2051C984-D9E0-4B1F-8BCF-F36ACAA307E7}
