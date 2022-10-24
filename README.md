@@ -5,6 +5,13 @@ Attached, please find a console application which main purpose is to convert the
 
 Prepare:
 1. Please find at least 5 potential code issues an be able to explain the reason behind it.
+    - **Paths in code**: If I want to change something, I need to rewrite the code and rebuild the app.
+    - **Relative paths in code**: It is debatable, but the app depends on a specific directory structure.
+    - **File specific path**: Every input file must have the same name.
+    - **File specific path**: Output file name/format only over code.
+    - **Not closing files**: In the case of an exception, the file will not be closed, potentially blocking the file for another process.
+    - **Not closing files**: Writing into a file without closing it will do nothing.
+    - **Validation**: Not sure about it, because it depends on the use case, requirements, and data type/structure. Do validation by using the schema to check if everything is OK with the output file.
 
 2. Refactor the app to allow:
     a. Work with documents of various storages eg. filesystem, cloud storage or HTTP (HTML read-only) etc. Implement just one of them but be sure that implementation is versatile for adding other storages.
