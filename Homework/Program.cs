@@ -15,6 +15,7 @@ namespace Moravia.Homework
 			var sourceFileName = Path.Combine(Environment.CurrentDirectory, "..\\..\\..\\SourceFiles\\Document1.xml");
 			var targetFileName = Path.Combine(Environment.CurrentDirectory, "..\\..\\..\\TargetFiles\\Document1.json");
 
+			// TODO: move read away
 			string input;
 			try
 			{
@@ -29,23 +30,12 @@ namespace Moravia.Homework
 
 			var sourceExtension = Path.GetExtension(sourceFileName);
 			var document = Document.FromSource(input, sourceExtension);
-			//var document = Document.FromXml(input);
-			//var document = Document.FromJson(input);
 
-			//var xdoc = XDocument.Parse(input);
-			//var doc = new Document
-			//{
-			//	Title = xdoc.Root.Element("title").Value,
-			//	Text = xdoc.Root.Element("text").Value
-			//};
 
 			var targetExtension = Path.GetExtension(targetFileName);
 			var serializedDoc = Document.ToTarget(document, targetExtension);
-			//var serializedDoc = Document.ToJson(document);
-			//var serializedDoc = Document.ToXml(document);
 
-			//var serializedDoc = JsonConvert.SerializeObject(document);
-
+			// TODO: move write away
 			var targetStream = File.Open(targetFileName, FileMode.Create, FileAccess.Write);
 			var sw = new StreamWriter(targetStream);
 			sw.Write(serializedDoc);
