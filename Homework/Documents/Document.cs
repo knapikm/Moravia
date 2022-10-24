@@ -11,57 +11,63 @@ using System.Xml.Serialization;
 
 namespace Homework.Documents
 {
+	public enum DocumentType { JSON, XML };
 	public class Document
 	{
+		[JsonIgnore]
+		[XmlIgnore]
+		public DocumentType DocumentType { get; set; }
+
 		[JsonProperty("title")]
+		[XmlElement("title")]
 		public string Title { get; set; }
 
 		[JsonProperty("text")]
+		[XmlElement("text")]
 		public string Text { get; set; }
 
 		public Document()
 		{
 		}
 
-		#region JSON
-		public static Document FromJson(string input)
+		public static Document FromSource(string input, string sourceExtension)
 		{
-			return JsonConvert.DeserializeObject<Document>(input);
-		}
+			DocumentType sourceType;
+			Enum.TryParse(sourceExtension.ToUpper().Replace(".", ""), out sourceType);
 
-		public static string ToJson(Document value)
-		{
-			return JsonConvert.SerializeObject(value);
-		}
-		#endregion
-
-		#region XML
-		public static Document FromXml(string input)
-		{
-			var xDoc = XDocument.Parse(input);
-
-			return new Document
+			switch (sourceType)
 			{
-				Title = xDoc.Root.Element("title").Value,
-				Text = xDoc.Root.Element("text").Value
-			};
-		}
+				case DocumentType.JSON: 
+					return DocumentJson.FromJson(input);
 
-		public static string ToXml(Document doc)
-		{
-			var xmlSerializer = new XmlSerializer(typeof(Document));
-			var xml = "";
+				case DocumentType.XML:
+					return DocumentXml.FromXml(input);
 
-			using (var stringWriter = new StringWriter())
-			{
-				using (XmlWriter writer = XmlWriter.Create(stringWriter))
-				{
-					xmlSerializer.Serialize(writer, doc);
-					xml = stringWriter.ToString();
-				}
+				// TODO: another formats....
+
+				default:
+					return null;
 			}
-			return xml;
 		}
-		#endregion
+		
+		public static string ToTarget(Document document, string targetExtension)
+		{
+			DocumentType targetType;
+			Enum.TryParse(targetExtension.ToUpper().Replace(".", ""), out targetType);
+
+			switch (targetType)
+			{
+				case DocumentType.JSON:
+					return DocumentJson.ToJson(document);
+
+				case DocumentType.XML:
+					return DocumentXml.ToXml(document);
+
+				// TODO: another formats....
+				
+				default:
+					return null;
+			}
+		}
 	}
 }

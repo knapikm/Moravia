@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Xml.Linq;
 using Homework.Documents;
@@ -26,7 +27,9 @@ namespace Moravia.Homework
 				throw new Exception(ex.Message);
 			}
 
-			var document = Document.FromXml(input);
+			var sourceExtension = Path.GetExtension(sourceFileName);
+			var document = Document.FromSource(input, sourceExtension);
+			//var document = Document.FromXml(input);
 			//var document = Document.FromJson(input);
 
 			//var xdoc = XDocument.Parse(input);
@@ -36,7 +39,9 @@ namespace Moravia.Homework
 			//	Text = xdoc.Root.Element("text").Value
 			//};
 
-			var serializedDoc = Document.ToJson(document);
+			var targetExtension = Path.GetExtension(targetFileName);
+			var serializedDoc = Document.ToTarget(document, targetExtension);
+			//var serializedDoc = Document.ToJson(document);
 			//var serializedDoc = Document.ToXml(document);
 
 			//var serializedDoc = JsonConvert.SerializeObject(document);
