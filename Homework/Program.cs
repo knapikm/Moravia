@@ -1,8 +1,8 @@
-﻿using System;
-using System.IO;
-using Homework;
+﻿using Homework;
 using Homework.Documents;
 using Homework.Storages;
+using System;
+using System.IO;
 
 namespace Moravia.Homework
 {
@@ -17,10 +17,10 @@ namespace Moravia.Homework
 			var sourceStorageType = StorageType.FS; // TODO: only for this demo, read from args
 			var input = Storage.ReadSource(sourceFileName, sourceStorageType);
 
-			var inputType = Utils.GetDocumentType(sourceFileName);
+			var inputType = Utils.GetDocumentType(sourceFileName); // TODO: this also could be done other way (args)
 			var document = Document.FromInput(input, inputType);
 
-			var outputType = Utils.GetDocumentType(targetFileName);
+			var outputType = Utils.GetDocumentType(targetFileName); // TODO: this also could be done other way (args)
 			var output = Document.ToOutput(document, outputType);
 
 			var targetStorageType = StorageType.FS; // TODO: only for this demo, read from args

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Homework.Storages
 {
-	public enum StorageType { FS, HTTP }; // ...
+	public enum StorageType { FS, HTTP }; // TODO: another storages....
 
 	public class Storage
 	{

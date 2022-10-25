@@ -4,16 +4,20 @@ using System.Xml.Serialization;
 
 namespace Homework.Documents
 {
-	public enum DocumentType { JSON, XML };
+	public enum DocumentType { JSON, XML }; // TODO: another formats....
 
 	public class Document
 	{
-		[JsonProperty("title")]
-		[XmlElement("title")]
+		// TODO: this also could be done other way, in App.config eg.
+		private const string TITLE = "title";
+		private const string TEXT = "text";
+
+		[JsonProperty(TITLE)]
+		[XmlElement(TITLE)]
 		public string Title { get; set; }
 
-		[JsonProperty("text")]
-		[XmlElement("text")]
+		[JsonProperty(TEXT)]
+		[XmlElement(TEXT)]
 		public string Text { get; set; }
 
 		public Document()
