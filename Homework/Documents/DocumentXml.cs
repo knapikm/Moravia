@@ -10,13 +10,9 @@ using System.Xml;
 
 namespace Homework.Documents
 {
-	public class DocumentXml : Document
+	internal static class DocumentXml
 	{
-		private DocumentXml()
-		{
-		}
-
-		public static Document FromXml(string input)
+		internal static Document ToDocument(string input)
 		{
 			var xDoc = XDocument.Parse(input);
 
@@ -27,7 +23,7 @@ namespace Homework.Documents
 			};
 		}
 
-		public static string ToXml(Document doc)
+		internal static string ToXml(Document doc)
 		{
 			Console.WriteLine(doc.GetType());
 			var xmlSerializer = new XmlSerializer(typeof(Document));

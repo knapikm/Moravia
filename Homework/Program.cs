@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Xml.Linq;
+using Homework;
 using Homework.Documents;
 using Newtonsoft.Json;
 
@@ -29,17 +30,19 @@ namespace Moravia.Homework
 			}
 
 			var sourceExtension = Path.GetExtension(sourceFileName);
-			var document = Document.FromSource(input, sourceExtension);
+			var sourceType = Utils.GetDocumentType(sourceExtension);
+			var document = Document.FromSource(input, sourceType);
 
 
 			var targetExtension = Path.GetExtension(targetFileName);
-			var serializedDoc = Document.ToTarget(document, targetExtension);
+			var targetType = Utils.GetDocumentType(targetExtension);
+			var target = Document.ToTarget(document, targetType);
 
 			// TODO: move write away
 			var targetStream = File.Open(targetFileName, FileMode.Create, FileAccess.Write);
-			var sw = new StreamWriter(targetStream);
-			sw.Write(serializedDoc);
-			sw.Close();
+			var writer = new StreamWriter(targetStream);
+			writer.Write(target);
+			writer.Close();
 
 			//Console.ReadLine();
 		}

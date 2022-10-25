@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
@@ -12,12 +13,9 @@ using System.Xml.Serialization;
 namespace Homework.Documents
 {
 	public enum DocumentType { JSON, XML };
+
 	public class Document
 	{
-		[JsonIgnore]
-		[XmlIgnore]
-		public DocumentType DocumentType { get; set; }
-
 		[JsonProperty("title")]
 		[XmlElement("title")]
 		public string Title { get; set; }
@@ -30,18 +28,15 @@ namespace Homework.Documents
 		{
 		}
 
-		public static Document FromSource(string input, string sourceExtension)
+		public static Document FromSource(string input, DocumentType sourceType)
 		{
-			DocumentType sourceType;
-			Enum.TryParse(sourceExtension.ToUpper().Replace(".", ""), out sourceType);
-
 			switch (sourceType)
 			{
 				case DocumentType.JSON: 
-					return DocumentJson.FromJson(input);
+					return DocumentJson.ToDocument(input);
 
 				case DocumentType.XML:
-					return DocumentXml.FromXml(input);
+					return DocumentXml.ToDocument(input);
 
 				// TODO: another formats....
 
@@ -50,11 +45,8 @@ namespace Homework.Documents
 			}
 		}
 		
-		public static string ToTarget(Document document, string targetExtension)
+		public static string ToTarget(Document document, DocumentType targetType)
 		{
-			DocumentType targetType;
-			Enum.TryParse(targetExtension.ToUpper().Replace(".", ""), out targetType);
-
 			switch (targetType)
 			{
 				case DocumentType.JSON:
