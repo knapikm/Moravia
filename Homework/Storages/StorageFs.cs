@@ -28,11 +28,11 @@ namespace Homework.Storages
 			return input;
 		}
 
-		internal static void Write(string output, string targetName)
+		internal static void Write(string output, string targeLocation)
 		{
 			try
 			{
-				using (var targetStream = File.Open(targetName, FileMode.Create, FileAccess.Write))
+				using (var targetStream = File.Open(targeLocation, FileMode.Create, FileAccess.Write))
 				{
 					var writer = new StreamWriter(targetStream);
 					writer.Write(output);

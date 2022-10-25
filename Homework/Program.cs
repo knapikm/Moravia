@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
-using System.Xml.Linq;
 using Homework;
 using Homework.Documents;
 using Homework.Storages;
-using Newtonsoft.Json;
 
 namespace Moravia.Homework
 {
@@ -14,20 +10,21 @@ namespace Moravia.Homework
 	{
 		static void Main(string[] args)
 		{
+			// TODO: read from args (CommandLineParser or maybe some config file)
 			var sourceFileName = Path.Combine(Environment.CurrentDirectory, "..\\..\\..\\SourceFiles\\Document2.json");
 			var targetFileName = Path.Combine(Environment.CurrentDirectory, "..\\..\\..\\TargetFiles\\Document2.xml");
 
-			var input = Storage.ReadSource(sourceFileName, StorageType.FS);
+			var sourceStorageType = StorageType.FS; // TODO: only for this demo, read from args
+			var input = Storage.ReadSource(sourceFileName, sourceStorageType);
 
-			var sourceType = Utils.GetDocumentType(sourceFileName);
-			var document = Document.FromSource(input, sourceType);
+			var inputType = Utils.GetDocumentType(sourceFileName);
+			var document = Document.FromInput(input, inputType);
 
-			var targetType = Utils.GetDocumentType(targetFileName);
-			var output = Document.ToTarget(document, targetType);
+			var outputType = Utils.GetDocumentType(targetFileName);
+			var output = Document.ToOutput(document, outputType);
 
-			Storage.WriteTarget(output, targetFileName, StorageType.FS);
-
-			//Console.ReadLine();
+			var targetStorageType = StorageType.FS; // TODO: only for this demo, read from args
+			Storage.WriteTarget(output, targetFileName, targetStorageType);
 		}
 	}
 }

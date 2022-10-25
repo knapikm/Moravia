@@ -1,13 +1,5 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Security.AccessControl;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
-using System.Xml.Linq;
 using System.Xml.Serialization;
 
 namespace Homework.Documents
@@ -28,9 +20,9 @@ namespace Homework.Documents
 		{
 		}
 
-		public static Document FromSource(string input, DocumentType sourceType)
+		public static Document FromInput(string input, DocumentType inputType)
 		{
-			switch (sourceType)
+			switch (inputType)
 			{
 				case DocumentType.JSON: 
 					return DocumentJson.ToDocument(input);
@@ -45,15 +37,15 @@ namespace Homework.Documents
 			}
 		}
 		
-		public static string ToTarget(Document document, DocumentType targetType)
+		public static string ToOutput(Document doc, DocumentType outputType)
 		{
-			switch (targetType)
+			switch (outputType)
 			{
 				case DocumentType.JSON:
-					return DocumentJson.ToJson(document);
+					return DocumentJson.ToJson(doc);
 
 				case DocumentType.XML:
-					return DocumentXml.ToXml(document);
+					return DocumentXml.ToXml(doc);
 
 				// TODO: another formats....
 				

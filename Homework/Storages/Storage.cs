@@ -10,9 +10,9 @@ namespace Homework.Storages
 
 	public class Storage
 	{
-		public static string ReadSource(string sourceLocation, StorageType inputType)
+		public static string ReadSource(string sourceLocation, StorageType storageType)
 		{
-			switch(inputType)
+			switch(storageType)
 			{
 				case StorageType.FS:
 					return StorageFs.Read(sourceLocation);
@@ -24,9 +24,9 @@ namespace Homework.Storages
 			}
 		}
 
-		public static void WriteTarget(string output, string targetLocation, StorageType outputType)
+		public static void WriteTarget(string output, string targetLocation, StorageType storageType)
 		{
-			switch(outputType)
+			switch(storageType)
 			{
 				case StorageType.FS:
 					StorageFs.Write(output, targetLocation);
