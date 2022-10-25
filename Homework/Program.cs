@@ -5,6 +5,7 @@ using System.IO;
 using System.Xml.Linq;
 using Homework;
 using Homework.Documents;
+using Homework.Storages;
 using Newtonsoft.Json;
 
 namespace Moravia.Homework
@@ -13,33 +14,18 @@ namespace Moravia.Homework
 	{
 		static void Main(string[] args)
 		{
-			var sourceFileName = Path.Combine(Environment.CurrentDirectory, "..\\..\\..\\SourceFiles\\Document1.xml");
-			var targetFileName = Path.Combine(Environment.CurrentDirectory, "..\\..\\..\\TargetFiles\\Document1.json");
+			var sourceFileName = Path.Combine(Environment.CurrentDirectory, "..\\..\\..\\SourceFiles\\Document2.json");
+			var targetFileName = Path.Combine(Environment.CurrentDirectory, "..\\..\\..\\TargetFiles\\Document2.xml");
 
-			// TODO: move read away
-			string input;
-			try
-			{
-				FileStream sourceStream = File.Open(sourceFileName, FileMode.Open);
-				var reader = new StreamReader(sourceStream);
-				input = reader.ReadToEnd();
-			}
-			catch (Exception ex)
-			{
-				throw new Exception(ex.Message);
-			}
+			var input = Storage.ReadSource(sourceFileName, StorageType.FS);
 
 			var sourceType = Utils.GetDocumentType(sourceFileName);
 			var document = Document.FromSource(input, sourceType);
 
 			var targetType = Utils.GetDocumentType(targetFileName);
-			var target = Document.ToTarget(document, targetType);
+			var output = Document.ToTarget(document, targetType);
 
-			// TODO: move write away
-			var targetStream = File.Open(targetFileName, FileMode.Create, FileAccess.Write);
-			var writer = new StreamWriter(targetStream);
-			writer.Write(target);
-			writer.Close();
+			Storage.WriteTarget(output, targetFileName, StorageType.FS);
 
 			//Console.ReadLine();
 		}

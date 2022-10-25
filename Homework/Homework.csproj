@@ -64,6 +64,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Storages\Storage.cs" />
+    <Compile Include="Storages\StorageFs.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="Documents\Document.cs" />
     <Compile Include="Documents\DocumentJson.cs" />
