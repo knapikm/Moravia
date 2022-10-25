@@ -29,13 +29,10 @@ namespace Moravia.Homework
 				throw new Exception(ex.Message);
 			}
 
-			var sourceExtension = Path.GetExtension(sourceFileName);
-			var sourceType = Utils.GetDocumentType(sourceExtension);
+			var sourceType = Utils.GetDocumentType(sourceFileName);
 			var document = Document.FromSource(input, sourceType);
 
-
-			var targetExtension = Path.GetExtension(targetFileName);
-			var targetType = Utils.GetDocumentType(targetExtension);
+			var targetType = Utils.GetDocumentType(targetFileName);
 			var target = Document.ToTarget(document, targetType);
 
 			// TODO: move write away
